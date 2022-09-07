@@ -22,6 +22,7 @@ public class SecurityConfig {
         return new InMemoryUserDetailsManager(user);
     }
 
+    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/login", "/register").permitAll()
             .antMatchers("/").access("hasRole('USER')").and()
