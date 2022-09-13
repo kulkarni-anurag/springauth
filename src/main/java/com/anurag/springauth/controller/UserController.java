@@ -1,6 +1,8 @@
 package com.anurag.springauth.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -18,7 +20,13 @@ public class UserController {
     private UserService service;
 
     @GetMapping(value = "/")
-    public String showHomePage(){
+    public String showHomePage(ModelMap model){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(principal instanceof UserDetails){
+            String username = ((UserDetails) principal).getUsername();
+
+            model.addAttribute("username", username);
+        }
         return "home";
     }
 

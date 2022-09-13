@@ -12,7 +12,7 @@
 <body>
     <%@ include file="common/navbar.jspf" %>
     <div class="container">
-        <h2 class="text-center mt-5">Welcome, Anurag</h2>
+        <h2 class="text-center mt-5">Welcome, ${username}</h2>
     </div>
 </body>
 </html>
