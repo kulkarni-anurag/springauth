@@ -16,21 +16,25 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public int create(User user) {
-        String sql = "INSERT INTO User(username, password) VALUES (?, ?)";
-        int create = jdbcTemplate.update(sql, user.getUsername(), user.getPassword());
+        String sql = "INSERT INTO Users(username, password, enabled) VALUES (?, ?, ?)";
+        int create = jdbcTemplate.update(sql, user.getUsername(), "{bcrypt}" + user.getPassword(), true);
+
+        String sql2 = "INSERT INTO Authorities(username, authority) VALUES (?, ?)";
+        jdbcTemplate.update(sql2, user.getUsername(), "ROLE_USER");
+
         return create;
     }
 
     @Override
     public int delete(String username) {
-        String sql = "DELETE FROM User WHERE username = ?";
+        String sql = "DELETE FROM Users WHERE username = ?";
         int delete = jdbcTemplate.update(sql, username);
         return delete;
     }
 
     @Override
     public User read(String username) {
-        String sql = "SELECT * FROM User WHERE username = ?";
+        String sql = "SELECT * FROM Users WHERE username = ?";
         BeanPropertyRowMapper<User> rowMapper = BeanPropertyRowMapper.newInstance(User.class);
         User user = jdbcTemplate.queryForObject(sql, rowMapper, username);
         return user;

@@ -16,7 +16,6 @@ public class UserService {
     public void signup(User user){
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
         String newPassword = encoder.encode(user.getPassword());
-        System.out.println(newPassword);
         user.setPassword(newPassword);
         userDAO.create(user);
     }
