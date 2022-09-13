@@ -1,27 +1,19 @@
 package com.anurag.springauth.model;
 
 public class User {
-    private int id;
     private String username;
     private String password;
+    private boolean enabled;
 
     public User() {
         super();
     }
 
-    public User(int id, String username, String password) {
+    public User(String username, String password, boolean enabled) {
         super();
-        this.id = id;
         this.username = username;
         this.password = password;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        this.enabled = enabled;
     }
 
     public String getUsername() {
@@ -40,8 +32,16 @@ public class User {
         this.password = password;
     }
 
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
     @Override
     public String toString() {
-        return "User [id=" + id + ", username=" + username + ", password=" + password + "]";
+        return "User [username=" + username + ", password=" + password + ", enabled=" + enabled + "]";
     }
 }
