@@ -44,4 +44,14 @@ public class UserController {
         service.signup(user);
         return "redirect:login";
     }
+
+    @GetMapping(value = "/login")
+    public String showLoginPage(){
+        return "login";
+    }
+
+    @GetMapping(value = "/logout")
+    public String showLogoutPage(){
+        return "logout";
+    }
 }
