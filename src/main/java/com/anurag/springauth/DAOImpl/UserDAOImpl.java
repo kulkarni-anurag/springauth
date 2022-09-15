@@ -17,7 +17,7 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public int create(User user) {
         String sql = "INSERT INTO Users(username, password, enabled) VALUES (?, ?, ?)";
-        int create = jdbcTemplate.update(sql, user.getUsername(), "{bcrypt}" + user.getPassword(), true);
+        int create = jdbcTemplate.update(sql, user.getUsername(), user.getPassword(), true);
 
         String sql2 = "INSERT INTO Authorities(username, authority) VALUES (?, ?)";
         jdbcTemplate.update(sql2, user.getUsername(), "ROLE_USER");
